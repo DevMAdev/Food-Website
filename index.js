@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
         host: "localhost",
         user: "root",
         password: "",
-        database: "node-project"
+        database: "node_project"
     })
 
     con.query("SELECT * FROM products", (err, result) => {
@@ -176,7 +176,7 @@ app.post('/place_order', (req, res) => {
         host: "localhost",
         user: "root",
         password: "",
-        database: "node-project"
+        database: "node_project"
     })
 
     const cart = req.session.cart;
@@ -190,9 +190,9 @@ app.post('/place_order', (req, res) => {
             console.log(err)
         }
         else {
-            const query = "INSERT INTO orders(id,name,email,phone,city,address,cost,status,date,products_ids) VALUES ?"
+            const query = "INSERT INTO orders (id,cost,name,email,status,city,address,phone,date,products_ids) VALUES ?"
             const values = [
-                [id, name, email, phone, city, address, cost, status, date, products_ids]
+                [id,cost,name,email,status,city,address,phone,date,products_ids]
             ];
 
             con.query(query, [values], (err, result) => {
@@ -207,7 +207,6 @@ app.post('/place_order', (req, res) => {
                     })
 
                 }
-
                 res.redirect('/payment')
             })
         }
@@ -228,7 +227,7 @@ app.get('/verify_payment', (req, res) => {
         host: "localhost",
         user: "root",
         password: "",
-        database: "node-project"
+        database: "node_project"
     })
 
     con.connect((err) => {
@@ -264,7 +263,7 @@ app.get('/single_product', (req, res) => {
         host: "localhost",
         user: "root",
         password: "",
-        database: "node-project"
+        database: "node_project"
     })
 
     con.query("SELECT * FROM products WHERE id=' "+id+" ' ", (err, result) => {
@@ -282,7 +281,7 @@ app.get('/products', (req, res) => {
         host: "localhost",
         user: "root",
         password: "",
-        database: "node-project"
+        database: "node_project"
     })
 
     con.query("SELECT * FROM products", (err, result) => {
